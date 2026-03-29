@@ -1,56 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body{
- background:#0f172a;
- color:white;
- font-family:sans-serif;
- text-align:center;
-}
-
-input{
- width:80%;
- padding:10px;
- margin:10px;
- border-radius:10px;
- border:none;
-}
-
-button{
- padding:10px 20px;
- background:#2563eb;
- color:white;
- border:none;
- border-radius:10px;
-}
-</style>
+<meta charset="UTF-8">
+<title>Teach AI</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
-
-<h2>🧠 Train Your AI</h2>
-
-<input id="q" placeholder="Enter Question">
-<input id="a" placeholder="Enter Answer">
-
-<br>
-<button onclick="teach()">Teach AI</button>
-
-<script>
-async function teach(){
- let q=document.getElementById("q").value;
- let a=document.getElementById("a").value;
-
- await fetch("/teach",{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({q:q,a:a})
- });
-
- alert("AI learned successfully 😎");
-}
-</script>
-
+<h1>Teach AI</h1>
+<form onsubmit="teach(); return false;">
+<input type="text" id="question" placeholder="Question"><br>
+<textarea id="answer" placeholder="Answer"></textarea><br>
+<button type="submit">Save</button>
+</form>
+<script src="/static/script.js"></script>
 </body>
 </html>

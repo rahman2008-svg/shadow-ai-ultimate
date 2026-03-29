@@ -1,24 +1,24 @@
-function askAI() {
-    let q = document.getElementById("ask_input").value;
+function ask() {
+    let question = document.getElementById("question").value;
     fetch("/ask", {
         method: "POST",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `question=${encodeURIComponent(q)}`
-    }).then(res=>res.json()).then(data=>{
-        let out = document.getElementById("chat_output");
-        out.innerHTML += `<p><b>You:</b> ${q}</p><p><b>AI:</b> ${data.answer}</p>`;
-    });
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "question=" + encodeURIComponent(question)
+    }).then(res => res.json())
+      .then(data => {
+        let chatBox = document.getElementById("chat-box");
+        chatBox.innerHTML += "<p><b>You:</b> "+question+"</p>";
+        chatBox.innerHTML += "<p><b>AI:</b> "+data.answer+"</p>";
+      });
 }
 
-function teachAI() {
-    let q = document.getElementById("teach_q").value;
-    let a = document.getElementById("teach_a").value;
-    fetch("/teach", {
+function teach() {
+    let q = document.getElementById("question").value;
+    let a = document.getElementById("answer").value;
+    fetch("/teach_submit", {
         method: "POST",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `question=${encodeURIComponent(q)}&answer=${encodeURIComponent(a)}`
-    }).then(res=>res.json()).then(data=>{
-        let out = document.getElementById("teach_output");
-        out.innerHTML += `<p>${data.message}</p>`;
-    });
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "question=" + encodeURIComponent(q) + "&answer=" + encodeURIComponent(a)
+    }).then(res => res.json())
+      .then(data => alert(data.message));
 }
